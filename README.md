@@ -12,3 +12,5 @@ WolfBot is a simple bot for Discord. It doesn't do much, but it's still fun
     ~roll  - rolls a die
     
     ~flip  - flips a coin
+
+    ~git   - Sends link to GitHub page into chat
