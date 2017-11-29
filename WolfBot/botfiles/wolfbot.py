@@ -100,4 +100,4 @@ async def on_ready():
     print("Wolfbot is now online!")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-bot.run('MjY3NjUzNDE0NjE0MzM1NDkw.DPsOng.3B4TVo1hb5kEXgehNUtYV8NCz9U')
+bot.run('MyKey')
