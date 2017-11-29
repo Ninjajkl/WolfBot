@@ -29,19 +29,7 @@ bot = commands.Bot("~")
 # | |    / _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` / __|
 # | |___| (_) | | | | | | | | | | | (_| | | | | (_| \__ \
 #  \_____\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|___/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                        
-# ~beep
-@bot.command(pass_context = True)
-async def beep(ctx):
-    await bot.say("Boop!")
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ~nani
-@bot.command(pass_context = True)
-async def nani(ctx):
-    await bot.say("omae wa mou")
-    time.sleep(1)
-    await bot.say("shindeiru")
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   
 # ~index
 @bot.command(pass_context = True)
 async def index(ctx):
@@ -54,8 +42,21 @@ async def index(ctx):
     ~nani  - omae wa mou shindeiru
     ~roll  - rolls a die
     ~flip  - flips a coin
+    ~git   - sends github link into chat
 
     """)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                     
+# ~beep
+@bot.command(pass_context = True)
+async def beep(ctx):
+    await bot.say("Boop!")
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~nani
+@bot.command(pass_context = True)
+async def nani(ctx):
+    await bot.say("omae wa mou")
+    time.sleep(1)
+    await bot.say("shindeiru")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~roll
 @bot.command(pass_context = True)
@@ -73,6 +74,10 @@ async def flip(ctx):
         result2 = 'heads'
     await bot.say(result2)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~ git
+@bot.command(pass_context = True)
+async def git(ctx):
+    await bot.say('Source code: https://github.com/Wolf20122012/WolfBot')
 #  ______               _       
 # |  ____|             | |      
 # | |____   _____ _ __ | |_ ___ 
@@ -94,5 +99,5 @@ async def on_ready():
     print('------')
     print("Wolfbot is now online!")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
+
 bot.run('MjY3NjUzNDE0NjE0MzM1NDkw.DPsOng.3B4TVo1hb5kEXgehNUtYV8NCz9U')
