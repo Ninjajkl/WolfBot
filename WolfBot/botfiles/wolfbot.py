@@ -1,4 +1,5 @@
 #Wolfbot by Gabe Frahm
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  _____                            _             
 # |_   _|                          | |            
@@ -37,12 +38,18 @@ async def index(ctx):
 
     WolfBot:wolf: index - Gabe Frahm
 
-    ~index - shows all current commands and uses. (duh, you just used it)
-    ~beep  - bot replies with boop
-    ~nani  - omae wa mou shindeiru
-    ~roll  - rolls a die
-    ~flip  - flips a coin
-    ~git   - sends github link into chat
+    ~index   - shows all current commands and uses. (duh, you just used it)
+    ~beep    - bot replies with boop
+    ~nani    - omae wa mou shindeiru
+    ~roll    - rolls a die
+    ~flip    - flips a coin
+    ~git     - sends github link into chat
+    ~oof     - oof
+    ~lottery - creates a lottery
+        ~lotterytickets  - shows all current lottery numbers, and who has the number.
+        ~lotteryclear    - clears all lottery numbers currently in lottery.
+        ~lotterytotal    - Shows how many lottery tickets are currently held
+        ~lotteryconclude - concludes the lottery. selects a winner and mentions them. 
 
     """)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                     
@@ -78,6 +85,68 @@ async def flip(ctx):
 @bot.command(pass_context = True)
 async def git(ctx):
     await bot.say('Source code: https://github.com/Wolf20122012/WolfBot')
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~oof
+@bot.command(pass_context = True)
+async def oof(ctx):
+    await bot.say('https://vignette3.wikia.nocookie.net/lumber-tycoon-2/images/5/5f/Wobblebobble.png/revision/latest?cb=20160401145738')
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~lottery
+
+user_tickets = []
+highestnum = 0
+@bot.command(pass_context = True)
+async def lottery(ctx):
+    global user_tickets
+    global highestnum
+    author_mem = ctx.message.author
+    author_str = str(author_mem)
+    
+    ticket_int = highestnum + 1
+    highestnum = ticket_int
+
+    ticket_str = str(ticket_int)
+    author = " " + author_str + " "
+
+    user_tickets.append(author)
+    user_tickets.append(ticket_int)
+    await bot.say(author_str + ": " + ticket_str)
+
+@bot.command(pass_context = True)
+async def lotterytickets(ctx):
+    await bot.say(user_tickets)
+
+@bot.command(pass_context = True)
+async def lotteryclear(ctx):
+    global user_tickets
+    user_tickets[:] = []
+    await bot.say("ALERT: Cleared all lottery tickets")
+
+@bot.command(pass_context = True)
+async def lotterytotal(ctx):
+    total_int = len(user_tickets)
+    total_int2 = total_int / 2
+    total = str(total_int2)
+    await bot.say("There are a total of " + total + " tickets in the current lottery.")
+
+@bot.command(pass_context = True)
+async def lotteryconclude(ctx):
+    await bot.say("LOTTERY ALERT: The lottery will now conclude as a winner is chosen...")
+    winningnum = random.randint(1,highestnum)
+    winningnum_str = str(winningnum)
+    if winningnum in user_tickets:
+        await bot.say("It appears we have a winner!!!")
+        #await bot.say(winningnum)
+        name_num = user_tickets.index(winningnum) - 1
+        name = user_tickets[name_num]
+        #await bot.say(name)
+        await bot.say("Congratulations to @" + name + "! You won with the number " + winningnum_str + "!")
+        user_tickets[:] = []
+        highestnum = 0
+    else: 
+        await bot.say("Oh man. Something went very very wrong. I guess there are no winners here! *que seinfeld theme*")
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  ______               _       
 # |  ____|             | |      
 # | |____   _____ _ __ | |_ ___ 
@@ -97,7 +166,10 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    print("Wolfbot is now online!")
+    print("Wolfbot is now online! Have fun :D")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-bot.run('MyKey')
+bot.run('key')
+
+#TODO:
+# Create a credits system
